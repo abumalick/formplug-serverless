@@ -5,6 +5,7 @@
   "author": "Daniel Ireson",
   "license": "MIT",
   "scripts": {
+    "deploy": "serverless deploy",
     "encrypt": "node ./scripts/encrypt.js",
     "decrypt": "node ./scripts/decrypt.js",
     "test": "NODE_ENV=test mocha './src/**/*.spec.js'"
