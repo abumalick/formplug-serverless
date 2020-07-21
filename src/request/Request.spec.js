@@ -335,6 +335,22 @@ describe('Request', function () {
     assert.strictEqual(error.message, "Non-whitelisted email in '_cc' field")
   })
 
+  it('should not reject a non-whitelisted email in replyTo field', function () {
+    const event = {
+      pathParameters: {},
+      queryStringParameters: {},
+      body: '_to=johndoe%40example.com&_replyTo=janedoe%40example.com&testing=true',
+      requestContext: {
+        identity: {
+          sourceIp: '127.0.0.1'
+        }
+      }
+    }
+    const testSubject = new Request(event, encryptionKey)
+    const error = testSubject.validate(['johndoe@example.com'])
+    assert.strictEqual(error, undefined)
+  })
+
   it('should reject validation if the honeypot field has been filled', function () {
     const event = {
       pathParameters: {},

@@ -56,7 +56,7 @@ class Request {
           return new UnprocessableEntityError(`Invalid email in '${field}' field`)
         }
 
-        if (whitelistedRecipients && emails.some(e => !whitelistedRecipients.includes(e))) {
+        if (field !== '_replyTo' && whitelistedRecipients && emails.some(e => !whitelistedRecipients.includes(e))) {
           return new UnprocessableEntityError(`Non-whitelisted email in '${field}' field`)
         }
       }

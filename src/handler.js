@@ -30,8 +30,7 @@ module.exports = container => async event => {
 
     const recipientCount = [].concat(
       request.recipients.cc,
-      request.recipients.bcc,
-      request.recipients.replyTo).length
+      request.recipients.bcc).length
 
     logging.info(`sending to '${request.recipients.to}' and ${recipientCount} other recipients`)
 
