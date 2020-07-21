@@ -34,7 +34,7 @@ Separate multiple email addresses by a semicolon.
 ```
 
 ### Special inputs
-Name | Description | Multiple emails | Required 
+Name | Description | Multiple emails | Required
 --- | --- | --- | ---
 _to | Email address of the primary recipient. | N | Y
 _cc | Email addresses to receive a carbon copy. | Y | N
@@ -43,6 +43,7 @@ _replyTo | Email addresses to set as reply to addresses. | Y | N
 _honeypot | A spam prevention field that should be hidden for regular website users. The submission will be ignored if the the _honeypot input is present and not empty. | / | N
 _recaptcha | User token from Google reCaptcha v3. | / | N
 _redirect | A URL to redirect users to after a successful form submission. | / | N
+_subject | The subject of the mail that will be sent. | / | N
 
 ### AJAX
 Append `format=json` to the query string to get responses back in JSON with a CORS allow all origin header.
@@ -118,6 +119,7 @@ ENCRYPTION_KEY | A random string used for encryption. | Y
 REGION | The AWS region to deploy to (this should be either *eu-west-1*, *us-east-1*, or *us-west-2* as these are the only SES supported regions). | Y
 STAGE | The AWS stage to deploy to (it's common to use *dev* or *prod*). | Y
 SENDER_ARN | The [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the sender email address. | Y
+SENDER | The Name of the sender | N
 MSG_RECEIVE_SUCCESS | This is returned to the user on a successful form submission if a redirect URL isn't provided. | N
 MSG_SUBJECT | The subject line to use in emails. | N
 WHITELISTED_RECIPIENTS | Only allow emails to be sent to specific addresses. | N
