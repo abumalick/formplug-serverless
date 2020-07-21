@@ -402,6 +402,24 @@ describe('Request', function () {
     assert.ok(testSubject.isRedirectResponse())
   })
 
+
+  it('should contain a subject when passed in the data', function () {
+    const event = {
+      pathParameters: {},
+      queryStringParameters: {},
+      body: '_to=johndoe%40example.com&_subject=ThisIsMySubject&testing=true',
+      requestContext: {
+        identity: {
+          sourceIp: '127.0.0.1'
+        }
+      }
+    }
+    const testSubject = new Request(event, encryptionKey)
+    const error = testSubject.validate()
+    assert.strictEqual(error, undefined)
+    assert.strictEqual(testSubject.subject, "ThisIsMySubject")
+  })
+
   it('should reject validation when there is no custom parameters', function () {
     const event = {
       pathParameters: {},

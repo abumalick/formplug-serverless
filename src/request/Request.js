@@ -16,6 +16,7 @@ class Request {
     this.recipients = this._buildRecipients(this.userParameters, encryptionKey)
     this.responseFormat = this._buildResponseFormat(event.queryStringParameters)
     this.redirectUrl = this._buildRedirectUrl(this.userParameters)
+    this.subject = this._buildSubject(this.userParameters)
     this.recaptcha = this._buildRecaptcha(this.userParameters)
     this.sourceIp = this._buildSourceIp(event.requestContext)
   }
@@ -36,13 +37,13 @@ class Request {
     for (const field of SINGLE_EMAIL_FIELDS) {
       if (field in this.userParameters) {
         const email = this.recipients[field.substring(1)].toLowerCase()
-        
+
         if (!validation.isEmail(email)) {
           return new UnprocessableEntityError(`Invalid email in '${field}' field`)
         }
 
         if (whitelistedRecipients && !whitelistedRecipients.includes(email)) {
-          return new UnprocessableEntityError(`Non-whitelisted email in '${field}' field`) 
+          return new UnprocessableEntityError(`Non-whitelisted email in '${field}' field`)
         }
       }
     }
@@ -136,6 +137,12 @@ class Request {
   _buildRedirectUrl (params) {
     if (params && '_redirect' in params) {
       return params['_redirect']
+    }
+  }
+
+  _buildSubject (params) {
+    if (params && '_subject' in params) {
+      return params['_subject']
     }
   }
 

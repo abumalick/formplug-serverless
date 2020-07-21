@@ -38,7 +38,7 @@ module.exports = container => async event => {
     const email = new Email(
       container.config.SENDER,
       container.config.SENDER_ARN,
-      container.config.MSG_SUBJECT,
+      request.subject || container.config.MSG_SUBJECT,
       request.recipients,
       request.userParameters)
 
